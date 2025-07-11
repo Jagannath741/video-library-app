@@ -39,7 +39,7 @@ export function UserLogin() {
   });
 
   return (
-    <div className="bg-light p-4 m-4 rounded shadow" style={{ maxWidth: "400px", margin: "auto" }}>
+    <div className="bg-light p-4 m-4 rounded shadow" style={{ maxWidth: "400px", margin: "auto" , color: "#078593ff" }}>
       <h3 className="text-center mb-3">User Login</h3>
 
       <form onSubmit={formik.handleSubmit}>
@@ -69,7 +69,7 @@ export function UserLogin() {
 
         {error && <div className="text-danger mb-3">{error}</div>}
 
-        <button type="submit" className="btn btn-warning w-100">Login</button>
+        <button type="submit" className="btn btn-info w-100">Login</button>
 
         <div className="my-3 text-center">
           <Link to="/user-register">New User? Register here</Link>

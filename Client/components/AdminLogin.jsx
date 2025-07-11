@@ -27,7 +27,7 @@ export function AdminLogin() {
   });
 
   return (
-    <div className="bg-light p-4 m-4 rounded shadow" style={{ maxWidth: "400px", margin: "auto", }}>
+    <div className="bg-light p-4 m-4 rounded shadow" style={{ maxWidth: "400px", margin: "auto", color: "#ce0e0ef0" }}>
       <h3>Admin Login</h3>
       <form onSubmit={formik.handleSubmit}>
         <dl>
@@ -36,7 +36,7 @@ export function AdminLogin() {
           <dt>Password</dt>
           <dd><input type="password" name="Password" onChange={formik.handleChange} className="form-control" /></dd>
         </dl>
-        <button className="btn btn-warning w-100">Login</button>
+        <button className="btn btn-danger w-100">Login</button>
         <Link to="/" className="mt-4 d-block text-center">Back to Home</Link>
       </form>
     </div>

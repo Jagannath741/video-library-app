@@ -28,7 +28,7 @@ export function UserRegister() {
   });
 
   return (
-    <div className="bg-light m-3 p-4 rounded shadow w-100" style={{ maxWidth: "400px", margin: "auto" }}>
+    <div className="bg-light m-3 p-4 rounded shadow w-100" style={{ maxWidth: "400px", margin: "auto", color: "#01792dff" }}>
       <h3 className="mb-3 text-center">Register User</h3>
       <form onSubmit={formik.handleSubmit}>
         <dl>
@@ -50,7 +50,7 @@ export function UserRegister() {
 
         {error && <div className="text-danger mb-2">{error}</div>}
 
-        <button type="submit" className="btn btn-warning w-100">Register</button>
+        <button type="submit" className="btn btn-success w-100">Register</button>
 
         <div className="my-3 text-center">
           <Link to="/user-login">Existing User Login</Link> | <Link to="/admin-login">Admin Login</Link>
