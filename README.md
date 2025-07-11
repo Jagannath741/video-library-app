@@ -1,24 +1,36 @@
+# 🎬 Video Library App
+
+A modern web-based video library platform for Admins and Users to log in and access video content.
+
+## 🚀 Live Deployment
+
+🔗 [Click here to view the live app](https://video-library-app-new.netlify.app/)
 
 ---
 
-## 🚀 Deployment Instructions
+## 📸 Screenshot
 
-### 🔹 Backend (Render)
+![Video Library App Screenshot](./Client/src/assets/screenshot1.png)
+![Video Library App Screenshot](./Client/src/assets/screenshot2.png)
+![Video Library App Screenshot](./Client/src/assets/screenshot3.png)
+![Video Library App Screenshot](./Client/src/assets/screenshot4.png)
 
-1. Go to [Render](https://video-library-app-jp.netlify.app/).
-2. Click **New Web Service** → **Deploy from GitHub**.
-3. Connect your GitHub repo (`video-library-app`).
-4. Set the following:
 
-   | Setting            | Value               |
-   |--------------------|---------------------|
-   | Root Directory     | `backend` ✅         |
-   | Build Command      | `npm install`       |
-   | Start Command      | `node server.js`    |
-   | Environment        | Node                |
+> Make sure the screenshot path is correct or replace with a public image URL (e.g. from GitHub or Imgur).
 
-5. Add the following **Environment Variables** (optional but recommended):
+---
 
-   ```env
-   MONGODB_URI=<your MongoDB Atlas URI>
-   PORT=5000
+## 🛠️ Tech Stack
+
+- ⚛️ React (Vite)
+- 🎨 Tailwind CSS + Bootstrap
+- 🔒 Google Authentication (for Admin)
+- 🌐 React Router
+- 📦 Axios
+- ☁️ Backend: MongoDB Atlas (via Express.js)
+- 🔗 Deployed on: Netlify (Frontend), Render (Backend)
+
+---
+
+## 📁 Project Structure
+
