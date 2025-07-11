@@ -12,7 +12,7 @@ export function AdminLogin() {
     },
     onSubmit: async (admin) => {
       try {
-        const response = await axios.post('http://127.0.0.1:5000/api/admin-login', admin);
+        const response = await axios.post('https://video-library-backend-tar9.onrender.com/api/admin-login', admin);
         alert(response.data.message);
         navigate("/admin-dashboard");
       } catch (err) {
@@ -27,7 +27,7 @@ export function AdminLogin() {
   });
 
   return (
-    <div className="bg-light p-4 m-4 w-25">
+    <div className="bg-light p-4 m-4 rounded shadow" style={{ maxWidth: "400px", margin: "auto", }}>
       <h3>Admin Login</h3>
       <form onSubmit={formik.handleSubmit}>
         <dl>

@@ -8,7 +8,7 @@ export function AdminDeleteVideo() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:5000/api/videos/${id}`)
+    axios.get(`https://video-library-backend-tar9.onrender.com/api/videos/${id}`)
       .then(response => setVideo(response.data))
       .catch(error => {
         console.error("Error fetching video:", error);
@@ -18,7 +18,7 @@ export function AdminDeleteVideo() {
 
   async function handleDeleteClick() {
     try {
-      await axios.delete(`http://127.0.0.1:5000/api/delete-video/${id}`);
+      await axios.delete(`https://video-library-backend-tar9.onrender.com/api/delete-video/${id}`);
       alert("Video deleted successfully.");
       navigate('/admin-dashboard');
     } catch (error) {

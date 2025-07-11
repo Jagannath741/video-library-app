@@ -17,7 +17,7 @@ export function UserRegister() {
     },
     onSubmit: async (user) => {
       try {
-        await axios.post(`http://127.0.0.1:5000/api/users/register`, user);
+        await axios.post(`https://video-library-backend-tar9.onrender.com/api/users/register`, user);
         alert("User Registered Successfully.");
         navigate("/user-login");
       } catch (err) {

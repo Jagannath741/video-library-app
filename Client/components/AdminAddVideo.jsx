@@ -21,7 +21,7 @@ export function AdminAddVideo() {
     },
     onSubmit: async (values) => {
       try {
-        await axios.post("http://127.0.0.1:5000/api/videos/add-video", values);
+        await axios.post("https://video-library-backend-tar9.onrender.com/api/videos/add-video", values);
         alert("✅ Video added successfully");
         navigate("/admin-dashboard");
       } catch (err) {
@@ -32,7 +32,7 @@ export function AdminAddVideo() {
   });
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:5000/api/get-categories")
+    axios.get("https://video-library-backend-tar9.onrender.com/api/get-categories")
       .then(response => {
         const categoryList = response.data;
         categoryList.unshift({ CategoryId: 0, CategoryName: "Select a Category" });
@@ -44,7 +44,7 @@ export function AdminAddVideo() {
   }, []);
 
   return (
-    <div className="m-3 p-3 bg-light w-25">
+    <div className="m-3 p-3 bg-light w-100">
       <h3 className="mb-3">Add New Video</h3>
       <form onSubmit={formik.handleSubmit} className="overflow-auto" style={{ maxHeight: '500px' }}>
         <dl>

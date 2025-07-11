@@ -18,7 +18,7 @@ export function UserDashBoard() {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:5000/api/get-videos") // ✅ Updated for Mongoose API
+      .get("https://video-library-backend-tar9.onrender.com/api/get-videos") // ✅ Updated for Mongoose API
       .then((response) => {
         setVideos(response.data);
       })

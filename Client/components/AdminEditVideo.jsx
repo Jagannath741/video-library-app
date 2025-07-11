@@ -23,7 +23,7 @@ export function AdminEditVideo() {
     enableReinitialize: true,
     onSubmit: async (values) => {
       try {
-        await axios.put(`http://127.0.0.1:5000/api/videos/${id}`, values);
+        await axios.put(`https://video-library-backend-tar9.onrender.com/api/videos/${id}`, values);
         alert("Video Edited Successfully.");
         navigate("/admin-dashboard");
       } catch (error) {
@@ -35,7 +35,7 @@ export function AdminEditVideo() {
 
   // Load categories
   function loadCategories() {
-    axios.get("http://127.0.0.1:5000/api/get-categories")
+    axios.get("https://video-library-backend-tar9.onrender.com/api/get-categories")
       .then(response => {
         response.data.unshift({ CategoryId: -1, CategoryName: "Select a Category" });
         setCategories(response.data);
@@ -46,7 +46,7 @@ export function AdminEditVideo() {
   // Load video by ID
   useEffect(() => {
     loadCategories();
-    axios.get(`http://127.0.0.1:5000/api/videos/${id}`)
+    axios.get(`https://video-library-backend-tar9.onrender.com/api/videos/${id}`)
       .then(response => {
         setVideo(response.data);
       })

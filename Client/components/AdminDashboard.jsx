@@ -16,7 +16,7 @@ const handleSignout = () => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:5000/api/get-videos") // ✅ Updated API endpoint
+      .get("https://video-library-backend-tar9.onrender.com/api/get-videos") // ✅ Updated API endpoint
       .then((response) => {
         setVideos(response.data);
       })
@@ -26,7 +26,7 @@ const handleSignout = () => {
   }, []);
 
   return (
-    <div className="bg-light p-3 m-3">
+    <div className="bg-light p-3 m-3 w-100">
       <div className="d-flex justify-content-between">
         <span className="mb-4 fs-3 fw-bold">Admin Dashboard</span>
         <span className="justify-content-end">
