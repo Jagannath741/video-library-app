@@ -1,5 +1,3 @@
-const Video = require("../models/Video");
-
 // Get all videos
 exports.getAllVideos = async (req, res) => {
   try {
@@ -20,7 +18,6 @@ exports.getVideoById = async (req, res) => {
     res.status(500).json({ message: "Error fetching video", error: err.message });
   }
 };
-
 
 // Add a new video
 exports.addVideo = async (req, res) => {
@@ -45,11 +42,9 @@ exports.addVideo = async (req, res) => {
 };
 
 // Delete video
-// Delete video by MongoDB _id
-// videoController.js
 exports.deleteVideo = async (req, res) => {
   try {
-    const result = await Video.findByIdAndDelete(req.params.id); // ✅ Correct usage
+    const result = await Video.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({ message: "Video not found" });
     }
@@ -59,7 +54,7 @@ exports.deleteVideo = async (req, res) => {
   }
 };
 
-// Update video (optional)
+// Update video
 exports.updateVideo = async (req, res) => {
   try {
     const updated = await Video.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -70,4 +65,13 @@ exports.updateVideo = async (req, res) => {
   }
 };
 
-
+// New method to get videos by category id
+exports.getVideosByCategory = async (req, res) => {
+  try {
+    const categoryId = parseInt(req.params.categoryId);
+    const videos = await Video.find({ CategoryId: categoryId });
+    res.json(videos);
+  } catch (err) {
+    res.status(500).json({ message: "Error retrieving videos by category", error: err.message });
+  }
+};
