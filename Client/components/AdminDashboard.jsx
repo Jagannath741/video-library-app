@@ -4,12 +4,14 @@ import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
+import banner from "../src/assets/admindash.jpg"
+
 export function AdminDashboard() {
   const [videos, setVideos] = useState([]);
   const [cookies, , removeCookie] = useCookies(["username"]);
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-const handleSignout = () => {
+  const handleSignout = () => {
     removeCookie("username");
     navigate("/admin-login");
   };
@@ -25,23 +27,33 @@ const handleSignout = () => {
       });
   }, []);
 
-  return (
-    <div className="bg-light p-3 m-3 w-100">
-      <div className="d-flex justify-content-between">
-        <span className="mb-4 fs-3 fw-bold">Admin Dashboard</span>
+  return( 
+    <div
+      style={{
+        backgroundImage: `url(${banner})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        height: "100vh",
+        width: "100%",
+        overflowY: "auto",
+        overflowX: "hidden",
+      }}
+    >
+      <div className="d-flex justify-content-between container-fluid">
+        <span className="mb-4 fs-3 text-white fw-bold">Admin Dashboard</span>
         <span className="justify-content-end">
-          <button onClick={handleSignout} className="btn btn-danger">Signout</button>
+          <button onClick={handleSignout} className="btn btn-danger my-2 mx-2">Signout</button>
         </span>
       </div>
       
-
-      <div className="mb-3">
+      <div className="mb-3 container-fluid">
         <Link to="/add-video" className="btn btn-primary">
-          <i className="bi bi-camera-video me-2"></i> Add Video
+          <i className="bi bi-camera-video"></i> Add Video
         </Link>
       </div>
 
-      <div className="table-responsive">
+      <div className="table-responsive container-fluid">
         <table className="table table-hover align-middle">
           <thead className="table-dark">
             <tr>
@@ -50,10 +62,10 @@ const handleSignout = () => {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="table-info" >
             {videos.map((video) => (
               <tr key={video._id}>
-                <td>{video.Title}</td>
+                <td className="text-black fw-bold fs-5">{video.Title}</td>
                 <td>
                   <iframe
                     src={video.Url}

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import banner from "../src/assets/dashboard.jpg";
+
 export function UserDashBoard() {
   const [cookies, , removeCookie] = useCookies(["username"]);
   const [videos, setVideos] = useState([]);
@@ -33,20 +35,70 @@ export function UserDashBoard() {
     return matchTitle && matchCategory;
   });
 
+  // New function to handle video download
+  const handleDownload = (videoUrl, videoTitle) => {
+    // Create an anchor element and trigger download
+    const link = document.createElement("a");
+    link.href = videoUrl;
+    // Use video title as filename with fallback to 'video'
+    link.download = videoTitle ? `${videoTitle}.mp4` : "video.mp4";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Handler to update video counts (views, likes, dislikes)
+  const updateVideoCount = async (videoId, field) => {
+    try {
+      const video = videos.find((v) => v._id === videoId);
+      if (!video) return;
+
+      // Increment the field count locally
+      const updatedCount = (video[field] || 0) + 1;
+
+      // Prepare updated video data
+      const updatedVideo = { ...video, [field]: updatedCount };
+
+      // Send PUT request to update video on backend
+      await axios.put(`https://video-library-backend-tar9.onrender.com/api/videos/${videoId}`, updatedVideo);
+
+      // Update local state
+      setVideos((prevVideos) =>
+        prevVideos.map((v) =>
+          v._id === videoId ? { ...v, [field]: updatedCount } : v
+        )
+      );
+    } catch (error) {
+      console.error(`Error updating ${field} count:`, error);
+    }
+  };
+
   return (
-    <div className="bg-light p-3 m-3">
-      <h3 className="d-flex justify-content-between align-items-center">
+    <div
+      className="bg-light"
+      style={{
+        backgroundImage: `url(${banner})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        height: "100vh",
+        width: "100%",
+        overflowY: "auto",
+        overflowX: "hidden",
+      }}
+    >
+      <h3 className="d-flex container-fluid justify-content-between align-items-center text-black">
         <div>
           <span className="me-2">{cookies["username"]}</span>
           <span>Dashboard</span>
         </div>
-        <button onClick={handleSignout} className="btn btn-outline-secondary">Sign out</button>
+        <button onClick={handleSignout} className="btn btn-danger m-2">Sign out</button>
       </h3>
 
-      <div className="row">
+      <div className="row container-fluid">
         <div className="col-md-3">
           <div className="mb-3">
-            <label className="form-label fw-bold">Search Videos</label>
+            <label className="form-label text-black fw-bold">Search Videos</label>
             <div className="input-group">
               <input
                 type="text"
@@ -76,8 +128,8 @@ export function UserDashBoard() {
           </div>
         </div>
 
-        <div className="col-md-9">
-          <section className="mt-3 d-flex flex-wrap">
+        <div className="col-md-9 container-fluid">
+          <section className="mt-3 d-flex" style={{ overflowX: "auto", flexWrap: "nowrap" }}>
             {filteredVideos.map((video) => (
               <div
                 key={video._id}
@@ -97,10 +149,31 @@ export function UserDashBoard() {
                   ></iframe>
                 </div>
                 <div className="card-footer d-flex justify-content-between align-items-center">
-                  <span><i className="bi bi-eye-fill"></i> {video.Views}</span>
-                  <span><i className="bi bi-hand-thumbs-up"></i> {video.Likes}</span>
-                  <span><i className="bi bi-hand-thumbs-down"></i> {video.Dislikes}</span>
-                  <button className="btn btn-sm btn-outline-dark">
+                  <span
+                    style={{ cursor: "pointer" }}
+                    onClick={() => updateVideoCount(video._id, "Views")}
+                    title="View"
+                  >
+                    <i className="bi bi-eye-fill"></i> {video.Views}
+                  </span>
+                  <span
+                    style={{ cursor: "pointer" }}
+                    onClick={() => updateVideoCount(video._id, "Likes")}
+                    title="Like"
+                  >
+                    <i className="bi bi-hand-thumbs-up"></i> {video.Likes}
+                  </span>
+                  <span
+                    style={{ cursor: "pointer" }}
+                    onClick={() => updateVideoCount(video._id, "Dislikes")}
+                    title="Dislike"
+                  >
+                    <i className="bi bi-hand-thumbs-down"></i> {video.Dislikes}
+                  </span>
+                  <button
+                    className="btn btn-sm btn-outline-dark"
+                    onClick={() => handleDownload(video.Url, video.Title)}
+                  >
                     <i className="bi bi-download"></i>
                   </button>
                 </div>
